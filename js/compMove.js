@@ -86,18 +86,18 @@ function closePos(mark, data) {
     for (let i = 0; i < data.length; i++) {
         let free = 0;
         let opp = 0;
-        let pos = "";
+        let pos = [];
         for (let j = 0; j < data[i].length; j++) {
             if (document.getElementById(data[i][j]).innerHTML === mark) {
                 opp++;
             } else if (document.getElementById(data[i][j]).innerHTML === "") {
                 free++;
-                pos = data[i][j];
+                pos.push(data[i][j]);
             }
         }
 
         if (free === 2 && opp === 1) {
-            transform(pos);
+            transform(pos[0]);
             return true;
         }
     }
