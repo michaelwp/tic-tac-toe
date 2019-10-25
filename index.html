@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <meta charset="UTF-8">
+    <title>Tac tic toe</title>
+</head>
+<body>
+<div class="container" id="workspace">
+    <img src="img/tttmarqlrg.gif" id="title"/>
+    <hr>
+    <div class="container sub-container">
+        <div class="container child-container" id="w1">
+            <div class="button" id="a1" onclick="transform(this.id); data();"></div>
+            <div class="button" id="a2" onclick="transform(this.id); data();"></div>
+            <div class="button" id="a3" onclick="transform(this.id); data();"></div>
+        </div>
+        <div class="container child-container" id="w2">
+            <div class="button" id="b1" onclick="transform(this.id); data();"></div>
+            <div class="button" id="b2" onclick="transform(this.id); data();"></div>
+            <div class="button" id="b3" onclick="transform(this.id); data();"></div>
+        </div>
+        <div class="container child-container" id="w3">
+            <div class="button" id="c1" onclick="transform(this.id); data();"></div>
+            <div class="button" id="c2" onclick="transform(this.id); data();"></div>
+            <div class="button" id="c3" onclick="transform(this.id); data();"></div>
+        </div>
+    </div>
+
+    <div class="container sub-container" id="desc">
+        <div class="indicator-container">
+            Next Turn
+            <input type="text" class="indicator" id="pos" value="X" size="1" readonly/>
+        </div>
+        <div class="indicator-container">
+            X
+            <input type="text" class="indicator" id="x" value="" size="6" readonly/>
+        </div>
+        <div class="indicator-container">
+            O
+            <input type="text" class="indicator" id="o" value="" size="6" readonly/>
+        </div>
+        <div class="indicator-container">
+            <input type="checkbox" value="com" id="com" checked>
+            Play with computer
+        </div>
+        <button id="new-match" onclick="reset()">New Match</button>
+    </div>
+    <hr>
+    <div id="footer">&copy;2019 - Michael WP</div>
+</div>
+
+<script src="js/assignValue.js"></script>
+<script src="js/assignData.js"></script>
+<script src="js/checkPosition.js"></script>
+<script src="js/compMove.js"></script>
+</body>
+</html>
