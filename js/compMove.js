@@ -22,8 +22,8 @@ const field = [
 ];
 
 function autoMove() {
-    const hotWin = autoChecking("O", fieldHor);
-    if (!hotWin) {
+    const horWin = autoChecking("O", fieldHor);
+    if (!horWin) {
         const verWin = autoChecking("O", fieldVer);
         if (!verWin) {
             const digWin = autoChecking("O", fieldDig);
@@ -35,12 +35,25 @@ function autoMove() {
 }
 
 function autoBlock() {
-    const hotStat = autoChecking("X", fieldHor);
-    if (!hotStat) {
+    const horStat = autoChecking("X", fieldHor);
+    if (!horStat) {
         const verStat = autoChecking("X", fieldVer);
         if (!verStat) {
             const digStat = autoChecking("X", fieldDig);
             if (!digStat) {
+                autoPos();
+            }
+        }
+    }
+}
+
+function autoPos() {
+    const horPos = closePos("O", fieldHor);
+    if (!horPos) {
+        const verPos = closePos("O", fieldVer);
+        if (!verPos) {
+            const digPos = closePos("O", fieldDig);
+            if (!digPos) {
                 randomMove();
             }
         }
@@ -68,7 +81,31 @@ function autoChecking(mark, data) {
     return false;
 }
 
+function closePos(mark, data) {
+    // set position status
+    for (let i = 0; i < data.length; i++) {
+        let free = 0;
+        let opp = 0;
+        let pos = "";
+        for (let j = 0; j < data[i].length; j++) {
+            if (document.getElementById(data[i][j]).innerHTML === mark) {
+                opp++;
+            } else if (document.getElementById(data[i][j]).innerHTML === "") {
+                free++;
+                pos = data[i][j];
+            }
+        }
+
+        if (free === 2 && opp === 1) {
+            transform(pos);
+            return true;
+        }
+    }
+    return false;
+}
+
 function randomMove() {
+    // set random position
     const randPos = Math.round(Math.random() * 8);
     if (document.getElementById(field[randPos]).innerHTML === "") {
         transform(field[randPos]);
