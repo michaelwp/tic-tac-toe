@@ -15,7 +15,7 @@ function transform(buttonId) {
 
         if (ind.value === "X") {
             ind.value = "O";
-            autoMove();
+            if (document.getElementById("com").checked === true) autoMove();
         } else {
             ind.value = "X";
         }
