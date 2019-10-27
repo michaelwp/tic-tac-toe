@@ -4,11 +4,12 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
     <meta charset="UTF-8">
-    <title>Tac tic toe</title>
+    <title>Tac tic toe - v.1.0.0</title>
 </head>
 <body>
 <div class="container" id="workspace">
-    <img src="img/tttmarqlrg.gif" id="title"/>
+    <img src="img/tttmarqlrg.gif" id="title" alt="undo"/>
+    <div id="version">v.1.0.0</div>
     <hr>
     <div class="container sub-container">
         <div class="container child-container" id="w1">
@@ -33,11 +34,11 @@
             Next Turn
             <input type="text" class="indicator" id="pos" value="X" size="1" readonly/>
         </div>
-        <div class="indicator-container">
+        <div class="indicator-container mark-indicator" id="xIndicator">
             X
             <input type="text" class="indicator" id="x" value="" size="6" readonly/>
         </div>
-        <div class="indicator-container">
+        <div class="indicator-container mark-indicator" id="oIndicator">
             O
             <input type="text" class="indicator" id="o" value="" size="6" readonly/>
         </div>
@@ -45,7 +46,16 @@
             <input type="checkbox" value="com" id="com" checked onclick="reset()">
             Play with computer
         </div>
-        <button id="new-match" onclick="reset()">New Match</button>
+        <div class="indicator-container" id="button-container">
+            <button id="btn-undo" onclick="historyMove('undo');">
+                <img src="img/undo-arrow.png" alt="undo" id="img-undo"/>
+            </button>
+            <!--            <button id="btn-redo"-->
+            <!--                    onclick="">-->
+            <!--                <img src="img/undo-arrow.png" alt="undo" id="img-redo"/>-->
+            <!--            </button>-->
+            <button id="new-match" onclick="reset()">New Match</button>
+        </div>
     </div>
     <hr>
     <div id="footer">&copy;2019 - Michael WP</div>
@@ -55,5 +65,6 @@
 <script src="js/assignData.js"></script>
 <script src="js/checkPosition.js"></script>
 <script src="js/compMove.js"></script>
+<script src="js/state.js"></script>
 </body>
 </html>

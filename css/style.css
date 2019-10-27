@@ -27,6 +27,7 @@
     margin: 5px;
     font-size: 25px;
     font-weight: bold;
+    text-align: center;
 }
 
 .indicator-container {
@@ -49,23 +50,32 @@
 }
 
 #a2, #c2 {
-    border-left: 5px solid darkblue;
-    border-right: 5px solid darkblue;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 #b1, #b3 {
-    border-top: 5px solid darkblue;
-    border-bottom: 5px solid darkblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }
 
 #b2 {
-    border: 5px solid darkblue;
+    border: 2px solid black;
 }
 
 button {
     font-size: 16px;
     padding: 5px;
     margin: 10px 0px 10px 0px;
+}
+
+#img-undo, #img-redo {
+    width: 20px;
+}
+
+#img-undo {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 #title {
@@ -76,4 +86,31 @@ button {
 #com {
     width: 25px;
     height: 25px;
+}
+
+#button-container {
+    vertical-align: middle;
+}
+
+#pos {
+    /*background-color: #f58282;*/
+    color: red;
+    font-weight: bold;
+}
+
+#version {
+    display: inline;
+    font-family: "Arial Black";
+}
+
+#xIndicator {
+    color: red;
+}
+
+#oIndicator {
+    color: #4194f2;
+}
+
+.mark-indicator {
+    font-size: 30px;
 }

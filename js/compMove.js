@@ -28,9 +28,15 @@ function autoMove() {
         if (!verWin) {
             const digWin = autoChecking("O", fieldDig);
             if (!digWin) {
-                autoBlock();
+                return autoBlock();
+            } else {
+                return digWin;
             }
+        } else {
+            return verWin;
         }
+    } else {
+        return horWin;
     }
 }
 
@@ -41,9 +47,15 @@ function autoBlock() {
         if (!verStat) {
             const digStat = autoChecking("X", fieldDig);
             if (!digStat) {
-                autoPos();
+                return autoPos();
+            } else {
+                return digStat;
             }
+        } else {
+            return verStat;
         }
+    } else {
+        return horStat;
     }
 }
 
@@ -54,7 +66,7 @@ function autoPos() {
         if (!verPos) {
             const digPos = closePos("O", fieldDig);
             if (!digPos) {
-                randomMove();
+                return randomMove();
             }
         }
     }
@@ -75,7 +87,7 @@ function autoChecking(mark, data) {
 
         if (free !== "full" && opp === 2) {
             transform(free);
-            return true;
+            return free;
         }
     }
     return false;
@@ -98,7 +110,7 @@ function closePos(mark, data) {
 
         if (free === 2 && opp === 1) {
             transform(pos[0]);
-            return true;
+            return pos[0];
         }
     }
     return false;
@@ -109,7 +121,7 @@ function randomMove() {
     const randPos = Math.round(Math.random() * 8);
     if (document.getElementById(field[randPos]).innerHTML === "") {
         transform(field[randPos]);
-        return;
+        return field[randPos];
     }
-    randomMove();
+    return randomMove();
 }
