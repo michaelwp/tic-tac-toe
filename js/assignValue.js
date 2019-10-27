@@ -1,64 +1,77 @@
-function transform(buttonId) {
+const xColor = "red"; //"#f58282";
+const oColor = "#4194f2";
+const nColor = "#ffffff";
+
+const ind = document.getElementById("pos");
+const x = document.getElementById("x");
+const o = document.getElementById("o");
+
+const com = document.getElementById("com");
+
+function transform(buttonId, history = false) {
     const btn = document.getElementById(buttonId);
-    const ind = document.getElementById("pos");
-    const x = document.getElementById("x");
-    const o = document.getElementById("o");
+    let compStep = "";
 
     if (data().x.slice(2) !== "win" && data().o.slice(2) !== "win") {
         if (btn.innerHTML === "") {
             btn.innerHTML = ind.value;
-            btn.innerHTML === "X" ? btn.style.backgroundColor = "#f58282" : btn.style.backgroundColor = "#a9cff5";
+            btn.innerHTML === "X" ? btn.style.color = xColor : btn.style.color = oColor;
         } else {
-            btn.innerHTML = "";
-            btn.style.backgroundColor = "#fff";
+            return;
         }
 
-        if (ind.value === "X") {
-            ind.value = "O";
-            if (document.getElementById("com").checked === true) autoMove();
+        const nextTurn = indChange(btn.innerHTML);
+        if (nextTurn === "X") {
+            x.value = buttonId;
+            if (!history) o.value = "";
+            if (com.checked && !history) {
+                compStep = autoMove();
+            }
         } else {
-            ind.value = "X";
+            o.value = buttonId;
         }
     }
 
     if (data().x.slice(2) === "win" || data().o.slice(2) === "win") {
         x.value = data().x.slice(2);
         o.value = data().o.slice(2);
+        return;
     }
-
-    console.log(data());
+    if (!history) {
+        console.log({x: x.value, o: o.value});
+        console.log(data());
+    }
 }
 
-function reset() {
-    document.getElementById("a1").innerHTML = "";
-    document.getElementById("a1").style.backgroundColor = "#fff";
+function indChange(mark) {
+    if (mark === "X") {
+        ind.value = "O";
+        ind.style.color = oColor;
+        return "X";
+    } else {
+        ind.value = "X";
+        ind.style.color = xColor;
+    }
+    return "O";
+}
 
-    document.getElementById("a2").innerHTML = "";
-    document.getElementById("a2").style.backgroundColor = "#fff";
+function historyMove(move) {
+    let posValue = x.value;
+    let mark = "O";
 
-    document.getElementById("a3").innerHTML = "";
-    document.getElementById("a3").style.backgroundColor = "#fff";
+    if (posValue !== "lose" && posValue !== "win") {
+        if (move === "undo" && document.getElementById(x.value).innerHTML !== "") {
+            if (o.value !== "" && document.getElementById(o.value).innerHTML !== "") {
+                posValue = o.value;
+                mark = "X";
+            }
+            document.getElementById(posValue).innerHTML = "";
+            document.getElementById(posValue).style.color = nColor;
+            indChange(mark);
+        }
 
-    document.getElementById("b1").innerHTML = "";
-    document.getElementById("b1").style.backgroundColor = "#fff";
-
-    document.getElementById("b2").innerHTML = "";
-    document.getElementById("b2").style.backgroundColor = "#fff";
-
-    document.getElementById("b3").innerHTML = "";
-    document.getElementById("b3").style.backgroundColor = "#fff";
-
-    document.getElementById("c1").innerHTML = "";
-    document.getElementById("c1").style.backgroundColor = "#fff";
-
-    document.getElementById("c2").innerHTML = "";
-    document.getElementById("c2").style.backgroundColor = "#fff";
-
-    document.getElementById("c3").innerHTML = "";
-    document.getElementById("c3").style.backgroundColor = "#fff";
-
-    document.getElementById("x").value = "";
-    document.getElementById("o").value = "";
-
-    document.getElementById("pos").value = "X";
+        if (document.getElementById(x.value).innerHTML !== "") {
+            if (com.checked) historyMove(move);
+        }
+    }
 }
